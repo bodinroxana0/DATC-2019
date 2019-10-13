@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BodinRoxana.Controllers
+namespace laboratorul1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -12,9 +12,9 @@ namespace BodinRoxana.Controllers
     {
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<List<Student>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Student_repo.student_list;
         }
 
         // GET api/values/5
