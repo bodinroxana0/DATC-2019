@@ -6,7 +6,7 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
 using Newtonsoft.Json.Linq;
 
-namespace lab2
+namespace laboratorul2
 {
     class Program
     {
@@ -21,6 +21,7 @@ namespace lab2
             string[] scopes=new string[]{
                 DriveService.Scope.Drive,
                 DriveService.Scope.DriveFile
+
             };
             var clientId="443094691967-fepi46eejfefp3f4f4u7kr7qdndvt4r4.apps.googleusercontent.com";
             var clientSecret="O4K_PJwdsd_3ndCULNCVV3NX";

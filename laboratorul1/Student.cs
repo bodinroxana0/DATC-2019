@@ -58,13 +58,13 @@ namespace laboratorul1
         {
             this.Facultate = Facultate;
         }
-        public Student(int id,String nume,int an,String facultate)
-        {
-            this.Id=id;
-            this.Nume=nume;
-            this.An=an;
-            this.Facultate=facultate;
-        }
+        // public Student(int id,String nume,int an,String facultate)
+        // {
+        //     this.Id=id;
+        //     this.Nume=nume;
+        //     this.An=an;
+        //     this.Facultate=facultate;
+        // }
 
     }
 }

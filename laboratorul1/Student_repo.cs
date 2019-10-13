@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,11 +14,11 @@ using Microsoft.Extensions.Options;
 
 namespace laboratorul1
 {
-    public class Student_repo
+    public static class Student_repo
     {
         public static List<Student> student_list=new List<Student>()
-        { new Student(1,"Bodin Roxana",4,"AC"),
-        new Student(2,"Gricz Alexandra",4,"AC"),
-        new Student(3,"Sabau Daniela",4,"AC")};
+        { 
+        new Student() { Id=1, Nume="Bodin Roxana", An=4, Facultate="AC"}
+        };
     }
 }
