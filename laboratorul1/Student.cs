@@ -15,56 +15,10 @@ namespace laboratorul1
 {
     public class Student
     {
-        public int Id;
-        public int An;
-        public String Nume;
-        public String Facultate;
-        public int getId()
-        {
-            return this.Id;
-        }
+        public int Id { get; set; }
+        public int An { get; set; }
+        public String Nume { get; set; }
 
-        public void setId(int Id)
-        {
-            this.Id = Id;
-        }
-
-        public int getAn()
-        {
-            return this.An;
-        }
-
-        public void setAn(int An)
-        {
-            this.An = An;
-        }
-
-        public String getNume()
-        {
-            return this.Nume;
-        }
-
-        public void setNume(String Nume)
-        {
-            this.Nume = Nume;
-        }
-
-        public String getFacultate()
-        {
-            return this.Facultate;
-        }
-
-        public void setFacultate(String Facultate)
-        {
-            this.Facultate = Facultate;
-        }
-        // public Student(int id,String nume,int an,String facultate)
-        // {
-        //     this.Id=id;
-        //     this.Nume=nume;
-        //     this.An=an;
-        //     this.Facultate=facultate;
-        // }
-
+        public String Facultate { get; set; }
     }
 }
