@@ -1,37 +1,46 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 
-
 namespace WebJob
 {
-    public class StudentsService : IDisposable
+    class WebJob
     {
-        private CloudTable studentsTable;
+        private static CloudTable studentsTable;
+        
+        private static CloudTable raportTable;
 
-        public StudentsService()
+        static void Main(string[] args)
+        {
+                Task.Run(async() =>
+                {
+                    await Init();
+                })
+                .GetAwaiter()
+                .GetResult();
+        }
+    
+       
+        static async Task Init()
         {
             string storageConnectionString = "DefaultEndpointsProtocol=https;"
-                            + "AccountName=datcdemoluni"
-                            + ";AccountKey=0iC24GOBAlLYUmGebdyEcmrMdxAMvwtKkLmfNy4mjF7dpigvoXGMU2VSWxEpDUXi5H3czl3+Z2TAYaqpY0nAhw=="
+                            + "AccountName=datcdemovineri"
+                            + ";AccountKey=yDSrMBCO7cHeRHJMkTbG1MZ3i7HKKWOMdcoHhe4N3iFn/VCZYgnN1AQ5Ga/LxidOzgv0llbT4ZXpUU2UO+12wQ=="
                             + ";EndpointSuffix=core.windows.net";
 
             var account = CloudStorageAccount.Parse(storageConnectionString);
             var tableClient = account.CreateCloudTableClient();
 
             studentsTable = tableClient.GetTableReference("StudentiBR");
-            //creare tabel raport 
-        }
-
-        public async Task Initialize()
-        {
             await studentsTable.CreateIfNotExistsAsync();
-            ///raport
+            //creare tabel raport 
+            raportTable=tableClient.GetTableReference("RaportBR");
+            await AddReport();
         }
 
-        public async Task<List<StudentEntity>> GetStudents()
+        static async Task<List<StudentEntity>> GetStudents()
         {
             if (studentsTable == null)
             {
@@ -51,15 +60,17 @@ namespace WebJob
 
             return students;
         }
-         public async Task<TableResult> AddReport(StudentEntity student)//numar studenti
+        static async Task<TableResult> AddReport()//numar studenti
         {
-            if (studentsTable == null)
+            await raportTable.CreateIfNotExistsAsync();
+            var students=await GetStudents();
+            if (raportTable == null)
             {
                 throw new Exception();
             }
-
-            var insertOperation = TableOperation.Insert(student);
-            return await studentsTable.ExecuteAsync(insertOperation);
+            var raport=new Raport(students.Count);
+            var insertOperation = TableOperation.Insert(raport);
+            return await raportTable.ExecuteAsync(insertOperation);
         }
         public void Dispose()
         {

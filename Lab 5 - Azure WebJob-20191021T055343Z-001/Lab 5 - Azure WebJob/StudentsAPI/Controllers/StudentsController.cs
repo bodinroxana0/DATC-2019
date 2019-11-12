@@ -1,8 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
+using System.Threading;
+using Microsoft.Azure.ServiceBus;
+using Newtonsoft.Json;
 using Models;
 using Services;
 
@@ -12,6 +21,10 @@ namespace StudentsAPI.Controllers
     [ApiController]
     public class StudentsController : ControllerBase
     {
+        const string ServiceBusConnectionString = "DefaultEndpointsProtocol=https;AccountName=proiectdatc;AccountKey=z8vcMZ8jKANXekLr7aRh0JQ9w9eYkHn++3N1Yzbb3MXhMclcizLVS05QaPAXo4U0ZAZDk1z7Mmf3UY2eIHujQQ==;EndpointSuffix=core.windows.net";
+        const string QueueName = "queue-1";
+        static IQueueClient queueClient;
+
         // GET api/students
         [HttpGet]
         public async Task<ActionResult<IEnumerable<StudentEntity>>> Get()
@@ -49,6 +62,13 @@ namespace StudentsAPI.Controllers
                 PhoneNumber = student.PhoneNumber,
                 Year = student.Year
             };
+            
+            // queueClient = new QueueClient(ServiceBusConnectionString, QueueName);
+            // string json = JsonConvert.SerializeObject(student);
+            // var message = new Message(Encoding.UTF8.GetBytes(json));
+            // Console.WriteLine($"Sending message: {json}");
+            //  // Send the message to the queue.
+            // await queueClient.SendAsync(message);
 
             using (var service = new StudentsService())
             {

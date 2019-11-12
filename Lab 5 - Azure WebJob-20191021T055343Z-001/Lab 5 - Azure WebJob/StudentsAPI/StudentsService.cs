@@ -10,13 +10,11 @@ namespace Services
     public class StudentsService : IDisposable
     {
         private CloudTable studentsTable;
+        
 
         public StudentsService()
-        {
-            string storageConnectionString = "DefaultEndpointsProtocol=https;"
-                            + "AccountName=datcdemoluni"
-                            + ";AccountKey=0iC24GOBAlLYUmGebdyEcmrMdxAMvwtKkLmfNy4mjF7dpigvoXGMU2VSWxEpDUXi5H3czl3+Z2TAYaqpY0nAhw=="
-                            + ";EndpointSuffix=core.windows.net";
+        {//DefaultEndpointsProtocol=https;AccountName=proiectdatc;AccountKey=z8vcMZ8jKANXekLr7aRh0JQ9w9eYkHn++3N1Yzbb3MXhMclcizLVS05QaPAXo4U0ZAZDk1z7Mmf3UY2eIHujQQ==;EndpointSuffix=core.windows.net
+            string storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=proiectdatc;AccountKey=z8vcMZ8jKANXekLr7aRh0JQ9w9eYkHn++3N1Yzbb3MXhMclcizLVS05QaPAXo4U0ZAZDk1z7Mmf3UY2eIHujQQ==;EndpointSuffix=core.windows.net";
 
             var account = CloudStorageAccount.Parse(storageConnectionString);
             var tableClient = account.CreateCloudTableClient();
